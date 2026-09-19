@@ -14,14 +14,14 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->simplePaginate(5);
-        return view("/dashboard", compact("posts"));
+        return view("post.index", compact("posts"));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view("post.create");
     }
 
     /**
@@ -29,7 +29,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
