@@ -4,11 +4,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
                 <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <!--Title -->
+                    <!--Image -->
                     <div>
                         <x-input-label for="image" :value="__('Image')" />
-                        <x-text-input id="image" class="block mt-1 w-full" type="file" name="image"
-                            :value="old('image')" required autofocus />
+                        <x-text-input id="image" class="block mt-1 w-full" type="file" name="image" autofocus />
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
@@ -16,14 +15,30 @@
                     <div class="mt-4">
                         <x-input-label for="title" :value="__('Title')" />
                         <x-text-input id="title" class="block mt-1 w-full" type="text" name="title"
-                            :value="old('title')" required autofocus />
+                            :value="old('title')" autofocus />
+                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                    </div>
+
+                    <!--Category -->
+                    <div class="mt-4">
+                        <x-input-label for="category_id" :value="__('Category')" />
+
+                        <select id="category_id" name="category_id"
+                            class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md-shadow-sm">
+                            <option value="">Select a category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>{{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
                     </div>
                     <!--content -->
                     <div class="mt-4">
                         <x-input-label for="content" :value="__('Content')" />
-                        <x-input-textarea id="content" class="block mt-1 w-full" name="content" :value="old('content')"
-                            required />
+                        <x-input-textarea id="content" class="block mt-1 w-full" name="content">
+                            {{ old('content') }}
+                        </x-input-textarea>
                         <x-input-error :messages="$errors->get('content')" class="mt-2" />
                     </div>
                     <x-primary-button class="mt-4">
