@@ -42,7 +42,6 @@ class PostController extends Controller
             ],
             'published_at' => ['nullable', 'datetime']
         ]);
-        dd($data);
         $image = $data['image'];
         unset($data['image']);
         $data['user_id'] = Auth::id();
