@@ -17,7 +17,14 @@
         @csrf
         @method('patch')
 
+        <!-- Avatar Image -->
 
+        <div>
+            <x-input-label for="image" :value="__('Avatar')" />
+            <x-text-input id="image" class="block mt-1 w-full" type="file" name="image" autofocus />
+            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+        </div>
+        <!-- Name -->
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -25,12 +32,30 @@
                 required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
+        <!-- username -->
+
+        <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)"
+                required autofocus autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('username')" />
+        </div>
+        <!-- Email -->
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)"
                 required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
+
+            <!-- Bio -->
+            <div class="mt-4">
+                <x-input-label for="bio" :value="__('Bio')" />
+                <x-input-textarea id="bio" class="block mt-1 w-full" name="bio">
+                    {{ old('bio') }}
+                </x-input-textarea>
+                <x-input-error :messages="$errors->get('bio')" class="mt-2" />
+            </div>
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
